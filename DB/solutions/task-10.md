@@ -69,7 +69,7 @@ After the TTL expires, the next `getTodosByUser` call results in a cache miss an
 
 The full implementation (`task-10.js`, Redis setup, `npm install redis`) is available in the pull request:
 
-> PR link will be added after creation
+> [PR #3 — DB-task-10: Redis caching for user todos](https://github.com/DrArzter/node.js-pre-training-course/pull/3)
 
 ## Summary
 
@@ -80,3 +80,4 @@ The full implementation (`task-10.js`, Redis setup, `npm install redis`) is avai
 - Cache is manually invalidated on every `create`, `update`, and `delete` operation to keep data consistent.
 - TTL ensures stale cache is automatically cleared even without explicit invalidation.
 - Full implementation is committed in the dedicated branch and linked via the pull request above.
+- **Issue encountered:** Branch `feature/DB-task-10-redis` was created from `main` instead of `feature/DB-task-07-prisma`. As a result, Prisma schema and client were not present and had to be copied manually (`prisma/schema.prisma`) with `npx prisma generate` re-run. Ideally this branch should have been based on the Prisma branch to inherit the existing setup.
