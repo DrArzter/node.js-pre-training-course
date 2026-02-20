@@ -63,11 +63,47 @@ export const FilteredToDoList: React.FC = () => {
   //   return true; // 'all' case
   // });
 
+  const [inputValue, setInputValue] = useState('');
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
+
+  const handleAdd = () => {
+    if (!inputValue.trim()) return;
+    setTodos([...todos, { id: Date.now(), title: inputValue.trim(), completed: false }]);
+    setInputValue('');
+  };
+
+  const handleComplete = (id: number) => {
+    setTodos(todos.map(todo => todo.id === id ? { ...todo, completed: true } : todo));
+  };
+
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'active') return !todo.completed;
+    if (filter === 'completed') return todo.completed;
+    return true;
+  });
+
   return (
     <div>
-      {/* TODO: Replace this with your implementation */}
-      <h4>Filtered ToDo List Component</h4>
-      <p>Implement derived state and filtering here</p>
+      <input
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)}
+        placeholder="Add todo"
+      />
+      <button onClick={handleAdd}>Add</button>
+      <div>
+        <button onClick={() => setFilter('all')}>All</button>
+        <button onClick={() => setFilter('active')}>Active</button>
+        <button onClick={() => setFilter('completed')}>Completed</button>
+      </div>
+      <ul>
+        {filteredTodos.map(todo => (
+          <li key={todo.id}>
+            {todo.title} - {todo.completed ? 'completed' : 'active'}
+            {!todo.completed && <button onClick={() => handleComplete(todo.id)}>Complete</button>}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }; 
