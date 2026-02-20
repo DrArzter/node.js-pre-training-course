@@ -116,7 +116,7 @@ node prisma/seed.js
 
 The full implementation (Prisma schema, migration, and seed script) is available in the pull request:
 
-> PR link will be added after creation
+> [PR #2 — DB-task-07: Prisma ORM setup with schema, migration and seed](https://github.com/DrArzter/node.js-pre-training-course/pull/2)
 
 ## Summary
 
