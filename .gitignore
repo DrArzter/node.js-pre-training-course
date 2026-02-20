@@ -31,4 +31,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # Ignore local env files
-.env.* 
+.env.*
+!.env.example
