@@ -12,6 +12,6 @@ enum TodoStatus {
     COMPLETED = 'completed'
 }
 
-type newTodo = Omit<Todo, 'id' | 'createdAt'>;
+type NewTodo = Omit<Todo, 'id' | 'createdAt'>;
 
-export { Todo, TodoStatus, newTodo };
+export { Todo, TodoStatus, NewTodo };
