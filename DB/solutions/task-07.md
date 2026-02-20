@@ -4,11 +4,15 @@
 
 ### Choose and Install an ORM
 
-I chose to use Prisma as the ORM for my Node.js project. I installed Prisma and the required database drivers using the following command:
+I chose to use Prisma as the ORM for my Node.js project.
+
+> **Note:** When initially installing Prisma, the latest version (v7.4.1) was installed. However, Prisma v7 introduced a breaking change — the `url` property in `datasource` block of `schema.prisma` is no longer supported and must be moved to a separate `prisma.config.ts` file. Since this approach adds unnecessary complexity for a learning project, I downgraded to **Prisma v6** which still uses the familiar `schema.prisma` configuration.
+
+I installed Prisma v6 and the required database drivers using the following commands:
 
 ```bash
-npm install @prisma/client
-npm install prisma --save-dev
+npm install @prisma/client@6
+npm install prisma@6 --save-dev
 ```
 
 ### Configure the ORM
@@ -119,4 +123,5 @@ The full implementation (Prisma schema, migration, and seed script) is available
 - I successfully connected my todo project to a PostgreSQL database using Prisma as the ORM.
 - I defined the models for `users` and `todos` with all fields matching the raw SQL schema (`description`, `createdAt`, `onDelete: Cascade`), ran migrations to create the tables, and wrote a seed script to populate the database with initial data.
 - The actual Prisma files (`schema.prisma`, `seed.js`) are committed in the dedicated branch and linked via the pull request above.
-- The process was straightforward, and I did not encounter any issues during the implementation.
+- **Issue encountered:** Prisma v7 was installed initially but it introduced a breaking change — `url` in `datasource` is no longer supported in `schema.prisma`. Downgraded to Prisma v6 to use the standard configuration approach.
+- Additionally, the database already contained tables created via raw SQL from previous tasks, which caused a migration drift error. The `todo_app` schema was reset (`prisma migrate reset`) to let Prisma fully manage it from scratch.
